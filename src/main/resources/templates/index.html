@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="UTF-8">
+    <!--<mnamename="viewport" content="width=device-width, initial-scale=1">-->
+    <title >[[${#httpServletRequest.remoteUser}]]画室</title>
+    <link rel="icon" href="/static/dist/img/phLogo.png" sizes="12*12">
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mikit.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mixslider.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mixslider-dots.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/index.css" />
+    <link rel="stylesheet" href="../static/dist/css/css/font-awesome.css">
+</head>
+<body>
+    <!--nav-->
+    <div th:replace="/fragments/header :: header" />
+
+    <!--header-->
+    <div id="header">
+        <div class="fading-slider">
+            <ul>
+                <li><img src="/static/dist/img/65466399_p0.png"></li>
+                <li><img src="/static/dist/img/65487462_p0.jpg"></li>
+                <li><img src="/static/dist/img/65586614_p0.jpg"></li>
+            </ul>
+        </div>
+    </div>
+
+    <!--main-->
+    <div id="main">
+
+        <nav class="mi-tab" data-component="tab">
+            <ul>
+                <li class="mi-active"><a href="#tab1">推荐</a></li>
+                <li><a href="#tab2">热门</a></li>
+                <li><a href="#tab3">最新</a></li>
+            </ul>
+        </nav>
+
+        <!--推荐-->
+        <div id="tab1">
+            <div class="border">
+                <a href="#">
+                    <img src="/static/dist/img/65466399_p0.png">
+                </a>
+                <div class="works-info">
+                    <label>标题</label>
+                    <div class="user-info">
+                        <img class="touxiang" th:src=" ${touxiang}"><a href="#"><span th:text=" ${username}"></span></a>
+                        <span class="user-time">2018.2.6</span>
+                    </div>
+                </div>
+                <div class="tags">
+                    <i class="fa fa-tag"></i>
+                    <a href="#">标签1</a>
+                    <a href="#">标签2</a>
+                    <a href="#">标签3</a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--热门-->
+        <div id="tab2">
+            <div class="border">
+                <a href="#">
+                    <img src="/static/dist/img/65487462_p0.jpg">
+                </a>
+                <div class="works-info">
+                    <label>标题</label>
+                    <div class="user-info">
+                        <img class="touxiang" th:src=" ${touxiang}"><a href="#"><span th:text=" ${username}"></span></a>
+                        <span class="user-time">2018.2.6</span>
+                    </div>
+                </div>
+                <div class="tags">
+                    <i class="fa fa-tag"></i>
+                    <a href="#">标签1</a>
+                    <a href="#">标签2</a>
+                    <a href="#">标签3</a>
+                </div>
+            </div>
+        </div>
+
+        <!--最新-->
+        <div id="tab3">
+
+            <!--<div th:each="userRelease :  ${userReleases}">
+                &lt;!&ndash;<a href="#">&ndash;&gt;
+                    &lt;!&ndash;<img th:each="">&ndash;&gt;
+                &lt;!&ndash;</a>&ndash;&gt;
+                <span th:text="${userRelease.uname}"></span>
+                <span th:text="${userRelease.getImgsUris().get(userReleaseStat.index).getImgUrl()}"></span>
+                <a href="#" th:each="tag : ${userRelease.userTags}">
+                    <a th:text="${tag.tagname}"></a>
+                </a>
+            </div>-->
+
+            <div class="border" th:each="userRelease :  ${userReleases}">
+                <a th:href="@{'/details/'+${userRelease.id}}">
+                    <img th:src="${userRelease.getImgsUris().get(0).getImgUrl()}">
+                </a>
+                <div class="works-info">
+                    <label th:text="${userRelease.title}"></label>
+                    <div class="user-info">
+                        <img class="touxiang" th:src="${userRelease.picture}"><a href="#"><span th:text="${userRelease.uname}"></span></a>
+                        <span class="user-time" th:text="${userRelease.releasedate}"></span>
+                    </div>
+                </div>
+                <div class="tags">
+                    <i class="fa fa-tag" ></i>
+                    <a th:each="tag : ${userRelease.userTags}">
+                        <a href="#" th:text="${tag.tagname}"></a>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--bottom-->
+    <div th:replace="/fragments/footer :: footer" />
+
+</body>
+<script type="text/javascript" src="/static/dist/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/dist/js/mikit.js"></script>
+<script type="text/javascript" src="/static/dist/js/mixslider.js"></script>
+<script type="text/javascript" src="/static/dist/js/mixslider-min.js"></script>
+<script>
+    $(function () {
+        $('.fading-slider').mixslider({
+            autoplay: true,
+            arrows: false
+        });
+    })
+</script>
+</html>

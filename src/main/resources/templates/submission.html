@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>投稿</title>
+    <link rel="icon" href="/static/dist/img/phLogo.png" sizes="12*12" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mikit.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mixslider.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mixslider-dots.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/submission.css" />
+
+    <link rel="stylesheet" href="/static/dist/css/style.css">
+    <link rel="stylesheet" href="/static/dist/css/webuploader.css">
+    <link rel="stylesheet" href="/static/dist/css/tag.css">
+    <link rel="stylesheet" href="/static/dist/css/normalize.css">
+    <link rel="stylesheet" href="/static/dist/css/pure.css">
+</head>
+<body>
+    <div th:replace="/fragments/header :: header" />
+
+    <!--main-->
+    <div id="main" class="main">
+        <h3>发布作画</h3>
+        <div class="upload-image">
+            <div class="tips">
+                <span class="dot"></span>
+                <span class="text">选择你的画</span>
+            </div>
+
+            <!--uploadImage-->
+            <form id="uploader">
+                <div class="choose-image">
+                    <div class="width_auto">
+                        <div id="container">
+                            <!--头部，相册选择和格式选择-->
+                            <div id="uploader1" >
+                                <div class="item_container">
+                                    <div id="" class="queueList" >
+                                        <div id="dndArea" class="placeholder">
+                                            <div id="filePicker"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="statusBar" style="display:none;">
+                                    <div class="progress">
+                                        <span class="text">0%</span>
+                                        <span class="percentage"></span>
+                                    </div><div class="info"></div>
+                                    <div class="btns">
+                                        <div id="filePicker2"></div>
+                                        <!--<div class="uploadBtn">开始上传</div>-->
+                                    </div>
+                                </div>
+                                &nbsp;  (最多可上传9张)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tips-1">
+                    <span class="dot"></span>
+                    <span class="text">作品标题</span>
+                    <input placeholder="请输入标题" style="padding-left: 12px" type="text" name="title" id="title" class="mi-w30">
+                </div>
+
+                <div class="tips-2">
+                    <span class="nbsp"></span>
+                    <span class="text">说点什么</span>
+                    <textarea placeholder="临摹和参考作品请注明" id="contents" name="contents" style="resize: none; width:635px; height:100px;max-width: 635px; max-height: 450px; margin-left: 20px; "></textarea>
+                </div>
+
+                <div class="tips-3">
+                    <span class="dot"></span>
+                    <span class="text">作品属性</span>
+                    <div style="float: right">
+                        <input type="radio" id="original" name="watt" value="original"/><label for="original">原创</label>
+                        <input type="radio" id="collaborative" name="watt" value="collaborative"/><label for="collaborative">同人</label>
+                        <input type="radio" id="exercise" name="watt" value="exercise"/><label for="exercise">练习</label>
+                    </div>
+                </div>
+
+                <div class="tips-4">
+                    <span class="dot"></span>
+                    <span class="text">作品标签</span>
+                    <input type="text" id="tagValue">
+                    <p style="padding-top: 30px;padding-left: 100px;font-size: 12px;color: #888888">
+                        添加标签,更容易找到同好。tips:按回车就可以添加多个标签哦~
+                    </p>
+                </div>
+
+                <div class="tips-5">
+                    <span class="nbsp"></span>
+                    <span class="text text-5">作品保护</span>
+                    <div class="normal-container" style="display: inline">
+                        <div class="smile-rating-container">
+                            <div class="smile-rating-toggle-container">
+                                <div class="submit-rating">
+                                    <input id="meh"  name="satisfaction" value="close" type="radio" />
+                                    <input id="fun" name="satisfaction" value="open" type="radio" />
+                                    <label for="meh" class="rating-label rating-label-meh">关闭</label>
+                                    <div class="smile-rating-toggle"></div>
+
+                                    <!--<div class="rating-eye rating-eye-left"></div>-->
+                                    <!--<div class="rating-eye rating-eye-right"></div>-->
+
+                                    <!--<div class="mouth rating-eye-bad-mouth"></div>-->
+
+                                    <div class="toggle-rating-pill"></div>
+                                    <label for="fun" class="rating-label rating-label-fun">开启</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" th:value="${#httpServletRequest.remoteUser}" id="uname">
+                <div class="uploadBtn">发布作品</div>
+            </form>
+
+
+        </div>
+    </div>
+
+    <div th:replace="/fragments/footer :: footer" />
+</body>
+<script type="text/javascript" src="/static/dist/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/dist/js/mikit.js"></script>
+<script type="text/javascript" src="/static/dist/js/mixslider.js"></script>
+<script type="text/javascript" src="/static/dist/js/mixslider-min.js"></script>
+
+<script src="/static/dist/js/tag.js"></script>
+<script src="/static/dist/js/webuploader.js"></script>
+<script src="/static/dist/js/upload.js" type="text/javascript" th:inline="javascript"></script>
+<script src="/static/dist/js/jquery.sortable.js"></script>
+<script src="/static/dist/js/plug-in.js"></script>
+<script>
+    $(function () {
+        var tag = new Tag("tagValue");
+//    tag.isDisable = true;
+        tag.initView();
+        $('.fading-slider').mixslider({
+            autoplay: true,
+            arrows: false
+        });
+    })
+</script>
+</html>

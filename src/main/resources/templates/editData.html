@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑资料</title>
+    <link rel="icon" href="/static/dist/img/phLogo.png" sizes="12*12">
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mikit.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mixslider.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mixslider-dots.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/index.css" />
+    <link rel="stylesheet" href="/static/dist/css/editdata.css">
+    <link rel="stylesheet" href="/static/dist/css/uikit.min.css">
+    <link rel="stylesheet" href="/static/dist/css/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/dist/css/ion.calendar.css">
+    <link rel="stylesheet" href="/static/dist/css/jquery.Jcrop.min.css">
+
+    <link rel="stylesheet" href="/static/dist/css/cropbox.css">
+
+    <style>
+        #container{
+            display: none;
+            position: absolute;
+            bottom: 400px;
+            left: 40%;
+        }
+    </style>
+</head>
+<body>
+
+<div th:replace="/fragments/header :: header" />
+
+<div id="main" class="main">
+    <div id="edit-data" class="uk-grid">
+        <div class="uk-width-medium-1-4">
+
+            <ul class="uk-nav uk-nav-side" data-uk-switcher="{connect:'#user-info'}">
+                <li><a href="#">编辑资料</a></li>
+                <li><a href="#">修改密码</a></li>
+            </ul>
+        </div>
+
+        <div class="uk-width-medium-3-4">
+
+            <ul id="user-info" class="uk-switcher">
+                <li><div class="basic">
+                    <form class="">
+                        <div class="mi-row">
+                            <div class="mi-col mi-col-6">
+                                <div class="mi-form-item">
+                                    <label>昵称</label>
+                                    <input type="text" class="mi-w50">
+                                    <a href="#" class="mi-button">检测</a>
+                                </div>
+                                <div class="mi-form-item">
+                                    <label>性别</label>
+                                    <input type="radio" checked id="male" name="watt" value="male"/><label for="male"><i class="fa fa-mars" style="color: #0097E6"></i></label>
+                                    <input type="radio" id="Female" name="watt" value="Female"/><label for="Female"><i class="fa fa-venus" style="color: #F45178;"></i></label>
+                                </div>
+                                <div class="mi-form-item">
+                                    <label>介绍</label>
+                                    <textarea placeholder="介绍一下自己吧~" style="resize: none; width:290px; height:100px;max-width: 290px; max-height: 450px;"></textarea>
+                                </div>
+                                <div class="mi-form-item">
+                                    <label>生日</label>
+                                    <input type="text" class="date mi-w50" placeholder="请选择日期">
+                                </div>
+                                <div class="mi-form-item">
+                                    <label>职业</label>
+                                    <input type="text" class="mi-w50">
+                                </div>
+                            </div>
+                            <div class="mi-col mi-col-6">
+                                <label>头像</label>
+                                <div class="canvas">
+                                    <img th:src=" ${touxiang}" style="width: 100%;height: 100%;border-radius: 50%;">
+                                </div>
+                                <h5 class="tips">建议尺寸200*200<br>小于10MB格式；jpg/png</h5>
+                                <a href="#" id="modify" class="mi-button">修改头像</a>
+                            </div>
+                        </div>
+                        <button class="mi-button">保存</button>
+                    </form>
+                </div></li>
+                <li><div class="updatePassword">
+                    <i id="logo" class="fa fa-user-o fa-3x"></i>
+                    <h1 class="mima">修改密码</h1>
+                    <form>
+                        <input name="nowpwd" type="password" placeholder="输入原始密码">
+                        <input name="newpwd" type="password" placeholder="设置新密码">
+                        <input name="renewpwd" type="password" placeholder="确认密码">
+                        <button id="ok" class="mi-button mi-w100">确定</button>
+                    </form>
+                </div></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="container" id="container">
+        <i id="close" class="fa fa-window-close"></i>
+        <div class="imageBox">
+            <div class="thumbBox"></div>
+            <div class="spinner" style="display: none">Loading...</div>
+        </div>
+        <div class="action">
+            <div class="new-contentarea tc">
+                <a href="javascript:void(0)" class="upload-img">
+                    <label for="upload-file">选择图像</label>
+                </a>
+                <input type="file" class="" name="upload-file" id="upload-file" />
+            </div>
+            <button id="btnUpload" class="Btnsty_peyton">上传</button>
+            <!--<input type="button" id="btnUpload" class="Btnsty_peyton" value="上传">-->
+            <button id="btnCrop"  class="Btnsty_peyton">裁切</button>
+            <!--<input type="button" id="btnCrop"  class="Btnsty_peyton" value="裁切">-->
+        </div>
+        <div class="cropped"></div>
+    </div>
+</div>
+
+<div style="margin-top: 165px">
+    <div th:replace="/fragments/footer :: footer" />
+</div>
+
+</body>
+<script type="text/javascript" src="/static/dist/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/dist/js/mikit.js"></script>
+<script type="text/javascript" src="/static/dist/js/mixslider.js"></script>
+<script type="text/javascript" src="/static/dist/js/mixslider-min.js"></script>
+<script type="text/javascript" src="/static/dist/js/uikit.min.js"></script>
+
+<script src="/static/dist/js/moment.min.js"></script>
+<script src="/static/dist/js/moment.zh-cn.js"></script>
+<script src="/static/dist/js/ion.calendar.min.js"></script>
+
+<script src="/static/dist/js/jquery.Jcrop.min.js"></script>
+<script src="/static/dist/js/cropbox.js"></script>
+<script>
+    $(function(){
+        $('.date').each(function(){
+            $(this).ionDatePicker({
+                lang: 'zh-cn',
+                format: 'YYYY-MM-DD'
+            });
+        });
+
+        $('#modify').click(function () {
+            $('#container').fadeIn(300);
+
+            $('#close').click(function () {
+                $("#container").fadeOut(300);
+            })
+        })
+        var options =
+            {
+                thumbBox: '.thumbBox',
+                spinner: '.spinner',
+                imgSrc: 'img/4.jpg'
+            }
+
+        var cropper = $('.imageBox').cropbox(options);
+        $('#upload-file').on('change', function(){
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                options.imgSrc = e.target.result;
+                cropper = $('.imageBox').cropbox(options);
+            }
+            reader.readAsDataURL(this.files[0]);
+            this.files = [];
+        })
+
+        $('#btnCrop').on('click', function(){
+            $("#btnUpload").removeAttr("disabled");
+            var img = cropper.getDataURL();
+            $('.cropped').html('');
+            $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:64px;margin-top:4px;border-radius:64px;box-shadow:0px 0px 12px #7E7E7E;" ><p>64px*64px</p>');
+            $('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:128px;margin-top:4px;border-radius:128px;box-shadow:0px 0px 12px #7E7E7E;"><p>128px*128px</p>');
+            $('.cropped').append('<img id="image" src="'+img+'" align="absmiddle" style="width:180px;margin-top:4px;border-radius:180px;box-shadow:0px 0px 12px #7E7E7E;"><p>180px*180px</p>');
+        })
+
+        $('#btnUpload').on('click',function () {
+            var img = cropper.getBlob();
+            console.log(img)
+            var formData = new FormData();
+            formData.append('file',img);
+            $.ajax({
+                url:'http://localhost:8081/touxiang',
+                data:formData,
+                type:'POST',
+                processData:false,
+                contentType:false,
+                success:function (res) {
+                    console.log(res)
+                }
+            });
+        })
+    });
+</script>
+</html>

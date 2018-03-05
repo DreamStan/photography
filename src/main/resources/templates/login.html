@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <!--<mnamename="viewport" content="width=device-width, initial-scale=1">-->
+    <title>Title</title>
+    <link rel="icon" href="/static/dist/img/phLogo.png" sizes="12*12">
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mikit.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/login.css" />
+</head>
+<body style="background-color: white ">
+<div>
+    <a th:href="@{/}">Photograph</a>
+</div>
+    <div id="loginDiv">
+        <form th:action="@{/login}" method="post" class="mi-form">
+            <div class="mi-message mi-message-success" data-component="message"><span style="font-size: 1.5em">Log in</span></div>
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">
+                    Invalid username and password.
+                </div>
+            </div>
+            <div th:if="${param.logout}">
+                <div class="alert alert-info">
+                    You have been logged out.
+                </div>
+            </div>
+            <div class="mi-form-item">
+                <label>UserName</label>
+                <input type="text" name="username" id="username" class="mi-auto" placeholder="UserName" required="true" autofocus="true">
+            </div>
+
+            <div class="mi-form-item">
+                <label>Password</label>
+                <input type="password" name="password" id="password" class="mi-auto" placeholder="Password" required="true">
+            </div>
+
+            <div class="mi-form-item">
+                <button class="mi-button mi-button-secondary mi-button-outline mi-button-upper button"><strong>从现在开始吧！</strong></button>
+            </div>
+            <!--<input type="hidden" name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+        </form>
+    </div>
+</body>
+<script type="text/javascript" src="/static/dist/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/dist/js/mikit.js"></script>
+<script type="text/javascript" color="21,46,95" opacity='0.8' zIndex="-2" count="150" src="/static/dist/js/canvas-nest.js"></script>
+</html>

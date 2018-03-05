@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/static/dist/img/phLogo.png" sizes="12*12">
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mikit.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mixslider.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mixslider-dots.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/header.css" />
+</head>
+<body>
+<!--nav-->
+<div th:fragment="header">
+<div id="top-bar"><a th:href="@{/}" class="logo">Photograph</a>
+    <div class="menu">
+        <div class="navbarDiv">
+            <nav id="navbar" class="mi-hide-sm">
+                <ul>
+                    <li><a  th:href="@{/}" class="home"><i class="mi-icon-home"></i>Home</a></li>
+                    <li><a th:href="@{/submission}" class="submission"><i class="mi-icon-component"></i>Submission</a></li>
+                    <li><a href="#" class="about"><i class="mi-icon-info"></i>About</a></li>
+                    <li>
+                        <a th:if="${#httpServletRequest.remoteUser==null}" data-component="dropdown" data-target="#Logon"
+                           href="#" class="login"><i class="mi-icon-community_me"></i>Login</a>
+                        <div class="mi-dropdown mi-hide" style="width: 125px" id="Logon">
+                            <ul>
+                                <li><a th:href="@{/login}">登录</a></li>
+                                <li><a th:href="@{/registered}">注册</a></li>
+                            </ul>
+                        </div>
+                        <a th:if="${#httpServletRequest.remoteUser!=null}" data-component="dropdown" data-target="#Sign-Out"
+                           href="#" class="username" th:inline="text"><img class="touxiang" th:src=" ${touxiang}"> [[${#httpServletRequest.remoteUser}]]</a>
+                        <div class="mi-dropdown mi-hide" style="width: 125px;" id="Sign-Out">
+                            <form th:action="@{/logout}" method="post">
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/homePage}" style="font-size: 1em;">个人主页</a>
+                                    </li>
+                                    <li><input type="submit" class="signout" value="Sign Out"></li>
+                                </ul>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+<script type="text/javascript" src="/static/dist/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/dist/js/mikit.js"></script>
+<script type="text/javascript" src="/static/dist/js/mixslider.js"></script>
+<script type="text/javascript" src="/static/dist/js/mixslider-min.js"></script>
+
+<script>
+    $(function () {
+        $('.fading-slider').mixslider({
+            autoplay: true,
+            arrows: false
+        });
+    })
+
+    layui.use('element', function(){
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+
+        //监听导航点击
+        element.on('nav(demo)', function(elem){
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+    });
+</script>
+</html>

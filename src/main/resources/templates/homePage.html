@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人主页</title>
+
+    <link rel="icon" href="/static/dist/img/phLogo.png" sizes="12*12">
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mikit.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mixslider.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mixslider-dots.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/index.css" />
+    <!--<link rel="stylesheet" type="text/css" href="dist/css/submission.css">-->
+    <!--<link rel="stylesheet" href="dist/cropbox.css.css">-->
+    <!--<link rel="stylesheet" href="dist/css/webuploader.css">-->
+    <!--<link rel="stylesheet" href="dist/tag/tag.css">-->
+    <!--<link rel="stylesheet" href="dist/css/normalize.css">-->
+    <!--<link rel="stylesheet" href="dist/css/pure.css">-->
+    <link rel="stylesheet" href="/static/dist/css/homePage.css">
+    <link rel="stylesheet" href="/static/dist/css/css/font-awesome.min.css">
+</head>
+<body>
+
+<div th:replace="/fragments/header :: header" />
+
+<!--header-->
+<div class="header" style="background-color: palegreen">
+    <div class="header_touxiang" th:style="'background: url('+ ${touxiang}+') no-repeat;background-size: 150px 150px'">
+        <div class="people-number">
+            <div class="t-left">
+                <a href="#">关注：0</a>
+            </div>
+            <div class="t-right">
+                <a href="#">粉丝：0</a>
+            </div>
+        </div>
+        <div class="detailed">
+            <div class="d-name">
+                <span th:text=" ${username}"></span>
+            </div>
+            <div class="d-content">
+                <span>introduction</span>
+            </div>
+            <div class="d-data">
+                <a th:href="@{/editData}" class="mi-button">编辑资料</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="main">
+
+    <nav class="mi-tab" data-component="tab">
+        <ul>
+            <li class="mi-active"><a href="#tab1">我的作品</a></li>
+            <li><a href="#tab2">喜欢的作品</a></li>
+        </ul>
+    </nav>
+
+    <!--我的作品-->
+    <div id="tab1">
+        <div class="border">
+            <a href="#">
+                <img src="/static/dist/img/65487462_p0.jpg">
+            </a>
+            <div class="works-info">
+                <label>标题</label>
+                <div class="user-info">
+                    <img class="touxiang" th:src=" ${touxiang}"><a href="#"><span th:text=" ${username}"></span></a>
+                    <span class="user-time">2018.2.6</span>
+                </div>
+            </div>
+            <div class="tags">
+                <i class="fa fa-tag"></i>
+                <a href="#">标签1</a>
+                <a href="#">标签2</a>
+                <a href="#">标签3</a>
+            </div>
+            <div class="works-edit">
+                <a href="#">编辑</a>
+                <a href="#" style="padding-left: 24px">删除</a>
+            </div>
+        </div>
+    </div>
+
+    <!--喜欢的作品-->
+    <div id="tab2">
+        <div class="border">
+            <a href="#">
+                <img src="/static/dist/img/65466399_p0.png">
+            </a>
+            <div class="works-info">
+                <label>标题</label>
+                <div class="user-info">
+                    <img class="touxiang" src="/static/dist/img/cat.jpg"><a href="#"><span>username</span></a>
+                    <span class="user-time">2018.2.6</span>
+                </div>
+            </div>
+            <div class="tags">
+                <i class="fa fa-tag"></i>
+                <a href="#">标签1</a>
+                <a href="#">标签2</a>
+                <a href="#">标签3</a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<div th:replace="/fragments/footer :: footer" />
+
+</body>
+
+<script type="text/javascript" src="/static/dist/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/dist/js/mikit.js"></script>
+<script type="text/javascript" src="/static/dist/js/mixslider.js"></script>
+<script type="text/javascript" src="/static/dist/js/mixslider-min.js"></script>
+<!--<script src="/static/disttag/tag.js"></script>-->
+
+<!--<script src="/static/dist/js/webuploader.js"></script>-->
+<!--<script src="/static/dist/js/upload.js"></script>-->
+<!--<script src="/static/dist/js/jquery.sortable.js"></script>-->
+<!--<script src="/static/dist/js/plug-in.js"></script>-->
+
+</html>

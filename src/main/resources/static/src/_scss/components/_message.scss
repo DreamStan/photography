@@ -1,0 +1,47 @@
+.mi-message {
+    position: relative;
+    font-size: $font-size-small;
+    line-height: $base-line-small;
+    background: $color-silver;
+    padding: 1rem 2.5rem 1rem 1rem;
+    margin-bottom: $base-line;
+
+    & a {
+        color: inherit;
+    }
+    & h2,
+    & h3,
+    & h4,
+    & h5,
+    & h6 {
+        margin-bottom: 0;
+    }
+    & .mi-close {
+        position: absolute;
+        right: 1rem;
+        top: 0.875rem;
+        cursor: pointer;
+    }
+}
+.mi-message.mi-message-error {
+    background: $color-error;
+    color: #fff;
+}
+.mi-message.mi-message-success {
+    background: $color-success;
+    color: #fff;
+}
+.mi-message.mi-message-warning {
+    background: $color-warning;
+}
+.mi-message.mi-message-focus {
+    background: $color-focus;
+    color: #fff;
+}
+.mi-message.mi-message-black {
+    background: $color-black;
+    color: #fff;
+}
+.mi-message.mi-message-inverted {
+    background: $color-inverted;
+}

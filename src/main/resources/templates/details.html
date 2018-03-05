@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>详情</title>
+    <link rel="icon" href="/static/dist/img/phLogo.png" sizes="12*12">
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mikit.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mixslider.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/mixslider-dots.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/details.css">
+    <link rel="stylesheet" href="/static/dist/css/css/font-awesome.css">
+    <link rel="stylesheet" href="../static/dist/css/alert.css">
+
+</head>
+<body>
+<!--nva-->
+<div th:replace="/fragments/header :: header" />
+
+<div id="main" class="main">
+
+    <div class="title">
+        <h4>标题</h4>
+    </div>
+    <div class="tags">
+        <i class="fa fa-tag"></i>
+        <a href="#">tag</a>
+        <a href="#">tag</a>
+        <a href="#">tag</a>
+    </div>
+    <div class="type-info" th:switch=" ${watt}">
+        <span th:case="'original'">原创&nbsp;&nbsp;|</span>
+        <span th:case="'collaborative'">同人&nbsp;&nbsp;|</span>
+        <span th:case="'exercise'">练习&nbsp;&nbsp;|</span>
+        <span th:text="'上传日期：'+ ${releasedate}"></span>
+    </div>
+    <div class="visit-info">
+        <i class="fa fa-eye"></i>
+        <span th:text=" ${pageView}"></span>
+    </div>
+    <hr>
+    <div class="content">
+        <div th:text=" ${contents}"></div>
+        <div class="images">
+            <div th:each="imgurl :  ${imgurl}">
+                <img th:src="${imgurl.getImgUrl()}">
+            </div>
+        </div>
+    </div>
+
+    <p class="copyright">版权提示：<i class="fa fa-circle-o"></i>&nbsp;未开启作品保护</p>
+    <!--<p>版权提示：<i class="fa fa-copyright"></i></p>-->
+
+<div class="user-detail">
+    <div class="face" th:style="'background-image: url('+ ${picture}+');background-repeat: no-repeat;background-size: 100px 100px'">
+    </div>
+    <div class="userinfo">
+        <h4><a href="#" th:text=" ${uname}"></a></h4>
+        <div><span>粉丝：0&nbsp;&nbsp;|</span><span>&nbsp;&nbsp;关注：0</span></div>
+        <button style="margin-left: 15px" class="mi-button">关注</button>
+        <div class="works-images">
+            <div class="tit-picture">TA的相册 0</div>
+            <div class="picture">
+                <div class="inline"><img src="/static/dist/img/cat.jpg"></div>
+                <div class="inline"><img src="/static/dist/img/cat.jpg"></div>
+                <div class="inline"><img src="/static/dist/img/cat.jpg"></div>
+                <div class="inline"><img src="/static/dist/img/cat.jpg"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<!--comment-->
+<div class="comment main">
+    <div class="tit">评论</div>
+    <hr style="margin-top: 30px">
+    <div class="comment-send">
+        <div class="user-face">
+            <img src="/static/dist/img/cat.jpg">
+        </div>
+        <div class="textarea-container">
+            <textarea class="comment-textarea" placeholder="说说你的感想吧"></textarea>
+            <button id="send" class="mi-button send">SEND</button>
+        </div>
+    </div>
+    <hr style="margin-top: -30px;width: 785px;margin-left: 90px">
+    <div class="comment-list">
+        <div class="list-item" th:each="comments :  ${comments}">
+            <div class="user-face">
+                <img src="/static/dist/img/cat.jpg">
+            </div>
+            <div class="comment-user">
+                <div class="PH-text">
+                    <a href="#" th:text="${comments.uname}+'：'"></a>
+                    <span th:text="${comments.content}"></span>
+                </div>
+                <div class="PH-func">
+                    <div class="PH-time" th:text="${comments.time}"></div>
+                    <div class="reply"><a href="#">回复</a></div>
+                </div>
+                <!--二级评论-->
+                <!--<div class="list-comment">
+                    <div class="list-ul">
+                        <div class="list-line">
+                            <div class="PH-text">
+                                <a href="#">昵称：</a>评论
+                            </div>
+                            <div class="PH-func">
+                                <div class="PH-time">2018-1-1</div>
+                                <div class="reply"><a href="#">回复</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                <hr>
+            </div>
+        </div>
+
+        <!--<div class="list-item">
+            <div class="user-face">
+                <img src="/static/dist/img/cat.jpg">
+            </div>
+            <div class="comment-user">
+                <div class="PH-text">
+                    <a href="#">昵称：</a>评论
+                </div>
+                <div class="PH-func">
+                    <div class="PH-time">2018-1-1</div>
+                    <div class="reply"><a href="#">回复</a></div>
+                </div>
+                &lt;!&ndash;二级评论&ndash;&gt;
+                <div class="list-comment">
+                    <div class="list-ul">
+                        <div class="list-line">
+                            <div class="PH-text">
+                                <a href="#">昵称：</a>评论
+                            </div>
+                            <div class="PH-func">
+                                <div class="PH-time">2018-1-1</div>
+                                <div class="reply"><a href="#">回复</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list-comment">
+                    <div class="list-ul">
+                        <div class="list-line">
+                            <div class="PH-text">
+                                <a href="#">昵称：</a>评论
+                            </div>
+                            <div class="PH-func">
+                                <div class="PH-time">2018-1-1</div>
+                                <div class="reply"><a href="#">回复</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>-->
+
+    </div>
+</div>
+
+
+<!--bottom-->
+<div th:replace="/fragments/footer :: footer" />
+</body>
+<script type="text/javascript" src="/static/dist/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/dist/js/mikit.js"></script>
+<script type="text/javascript" src="/static/dist/js/mixslider.js"></script>
+<script type="text/javascript" src="/static/dist/js/mixslider-min.js"></script>
+<script src="/static/dist/js/alert.js"></script>
+<script src="/static/dist/js/sendComment.js"></script>
+</html>

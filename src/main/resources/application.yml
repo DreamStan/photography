@@ -1,0 +1,46 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/photograph?serverTimezone=UTC
+    username: root
+    password: parkour1998
+  redis:
+#    host: 192.168.126.130
+    host: 127.0.0.1
+    port: 6379
+    timeout: 10000
+    pool:
+      max-active: 8
+      max-wait: -1
+#      集群
+#    cluster:
+#      nodes: 192.168.126.132:7001,192.168.126.132:7002,192.168.126.132:7003,192.168.126.132:7004,192.168.126.132:7005,192.168.126.132:7006
+  thymeleaf:
+    encoding: utf-8
+    cache: false
+    content-type: text/html
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    enabled: true
+  http:
+    multipart:
+#    单个文件大小
+      max-file-size: 10mb
+#      总文件大小
+      max-request-size: 95mb
+#  mvc:
+#    static-path-pattern: /**
+#  resources:
+#    static-locations: file:F:\ACCP\Photograph\src\main\resources\uploadImage
+server:
+  port: 8081
+mybatis:
+#  扫描@Mapper
+  type-aliases-package: com.photograph.pojo
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  mapper-locations: "classpath:/com/photograph/dao/*.xml"
+
+cbs:
+  imagesPath: file:F:\ACCP\Photograph\src\main\resources\uploadImage
